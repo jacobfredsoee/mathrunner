@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=3 uid="uid://kkegnotge2qq"]
+
+[ext_resource type="Script" path="res://scenes/problem.gd" id="1_ljihx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s8tw"]
+size = Vector2(55, 128)
+
+[node name="Problem" type="Node"]
+script = ExtResource("1_ljihx")
+
+[node name="AnswerTop" type="Area2D" parent="."]
+position = Vector2(1528, 170)
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionTop" type="CollisionShape2D" parent="AnswerTop"]
+position = Vector2(1.5, 16)
+shape = SubResource("RectangleShape2D_0s8tw")
+
+[node name="Label" type="Label" parent="AnswerTop"]
+offset_left = -28.0
+offset_top = -36.0
+offset_right = 29.0
+offset_bottom = 33.0
+theme_override_font_sizes/font_size = 50
+text = "14"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AnswerBottom" type="Area2D" parent="."]
+position = Vector2(1533, 391)
+collision_mask = 2
+metadata/_edit_group_ = true
+
+[node name="CollisionBottom" type="CollisionShape2D" parent="AnswerBottom"]
+position = Vector2(-2.5, 1)
+shape = SubResource("RectangleShape2D_0s8tw")
+
+[node name="Label" type="Label" parent="AnswerBottom"]
+offset_left = -31.0
+offset_top = -35.0
+offset_right = 26.0
+offset_bottom = 34.0
+theme_override_font_sizes/font_size = 50
+text = "14"
+horizontal_alignment = 1
+
+[node name="Formular" type="Label" parent="."]
+offset_left = 56.0
+offset_top = 2.0
+offset_right = 283.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 60
+text = "7 + 7 = ?"
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="AnswerTop" to="." method="_on_answer_top_body_entered"]
+[connection signal="body_entered" from="AnswerBottom" to="." method="_on_answer_bottom_body_entered"]

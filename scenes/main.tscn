@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://bxyejr3tg6v2o"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_cuv8j"]
+[ext_resource type="PackedScene" uid="uid://dfd412rmboi3n" path="res://scenes/ground.tscn" id="1_hghlg"]
+[ext_resource type="PackedScene" uid="uid://de46ou468sl6h" path="res://scenes/player.tscn" id="2_wwfxu"]
+[ext_resource type="PackedScene" uid="uid://wyouvx8xxjb2" path="res://scenes/hud.tscn" id="4_rrf1u"]
+[ext_resource type="AudioStream" uid="uid://b4k5p64n4ns5y" path="res://assets/sounds/mixkit-winning-a-coin-video-game-2069.wav" id="5_vbw3c"]
+[ext_resource type="AudioStream" uid="uid://c6hitnl6h1rx1" path="res://assets/sounds/mixkit-arcade-retro-game-over-213.wav" id="6_si45b"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_cuv8j")
+
+[node name="Ground" parent="." instance=ExtResource("1_hghlg")]
+
+[node name="Player" parent="." instance=ExtResource("2_wwfxu")]
+position = Vector2(120, 402)
+
+[node name="CorrectSound" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-24, -80.4)
+scale = Vector2(0.2, 0.2)
+stream = ExtResource("5_vbw3c")
+
+[node name="IncorrectSound" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-24, -80.4)
+scale = Vector2(0.2, 0.2)
+stream = ExtResource("6_si45b")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(480, 270)
+
+[node name="HUD" parent="." instance=ExtResource("4_rrf1u")]
