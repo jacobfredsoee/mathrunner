@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	# Handle jump.
 	if is_on_floor():
 		$AnimatedSprite2D.play("running")
-		if Input.is_action_just_pressed("ui_accept"):
+		if Input.is_action_just_pressed("Jump"):
 			$AudioStreamPlayer.play()
 			velocity.y = JUMP_VELOCITY
 			$AnimatedSprite2D.play("jumping")

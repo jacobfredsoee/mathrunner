@@ -11,11 +11,14 @@ func set_formular(formular: String):
 func set_score(score: int):
 	$Score.text = str("Score: ", score)
 
-func loose_life():
-	healthbar.loose_life()
+func lose_life():
+	healthbar.lose_life()
+
+func reset_lives():
+	healthbar.reset_lives()
 
 func initialize_lives(n_lives: int) -> void:
 	$Healthbar.initialize_lives(n_lives)
 
-func show_game_over():
-	$GameOverScreen.visible = true
+func show_game_over(state: bool = true):
+	$GameOverScreen.visible = state

@@ -28,10 +28,10 @@ func _ready() -> void:
 	$HUD.initialize_lives(INITIAL_LIVES)
 
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("Jump"):
 		if not game_running: # Only start game and reset speed if not already running
+			reset_game()
 			game_running = true
-			current_speed = INITIAL_SPEED
 	
 	if not game_running:
 		return
@@ -47,6 +47,7 @@ func _process(delta: float) -> void:
 	generate_problem()
 	move_problems(delta)
 	manage_score(delta)
+	check_game_over()
 
 func report_score(correct: bool, value: int):
 	if correct:
@@ -56,16 +57,26 @@ func report_score(correct: bool, value: int):
 		$Player/IncorrectSound.play()
 		score -= value
 		lives -= 1
-		$HUD.loose_life()
-		if lives <= 0:
-			$HUD.show_game_over()
-			# Free all existing problems from the scene
-			for problem in problems:
-				problem.queue_free()
-			problems.clear()
-			game_running = false
-			return
+		$HUD.lose_life()
 
+func check_game_over() -> void:
+	if lives <= 0:
+		$HUD.show_game_over(true)
+		# Free all existing problems from the scene
+		for problem in problems:
+			problem.queue_free()
+		problems.clear()
+		game_running = false
+
+func reset_game():
+	problems.clear()
+	score = 0.0
+	lives = INITIAL_LIVES
+	$HUD.initialize_lives(INITIAL_LIVES)
+	$HUD.set_score(score)
+	current_speed = INITIAL_SPEED
+	$HUD.reset_lives()
+	$HUD.show_game_over(false)
 
 func manage_score(delta: float):
 	var speed_multiplier = max(1.0, (current_speed - INITIAL_SPEED) / SPEED_MULTIPLIER_STEP + 1.0)
