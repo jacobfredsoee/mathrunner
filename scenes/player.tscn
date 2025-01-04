@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://de46ou468sl6h"]
 
-[ext_resource type="Script" path="res://scenes/player.gd" id="1_gbc0b"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_gbc0b"]
 [ext_resource type="Texture2D" uid="uid://sdxgc5i8ykx7" path="res://assets/images/mort.png" id="1_hgl8b"]
 [ext_resource type="AudioStream" uid="uid://bjy4jwl6bp23w" path="res://assets/sounds/jump.wav" id="2_dik04"]
 

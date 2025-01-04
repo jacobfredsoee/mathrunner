@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bliaqtqbk8g4g"]
+
+[ext_resource type="Script" path="res://scripts/life.gd" id="1_e51jr"]
+[ext_resource type="Texture2D" uid="uid://cnv0p840b8wqu" path="res://assets/images/life.png" id="2_ssrab"]
+
+[node name="Life" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_e51jr")
+
+[node name="Full" type="Sprite2D" parent="."]
+texture = ExtResource("2_ssrab")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, 0, 24, 24)
+
+[node name="Used" type="Sprite2D" parent="."]
+texture = ExtResource("2_ssrab")
+centered = false
+region_enabled = true
+region_rect = Rect2(24, 0, 24, 24)

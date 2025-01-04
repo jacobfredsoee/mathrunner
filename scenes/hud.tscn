@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://wyouvx8xxjb2"]
 
-[ext_resource type="Script" path="res://scenes/hud.gd" id="1_6orqn"]
-[ext_resource type="Texture2D" uid="uid://cnv0p840b8wqu" path="res://assets/images/life.png" id="2_raljj"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="1_6orqn"]
+[ext_resource type="PackedScene" uid="uid://c07fyy1eyw2vr" path="res://scenes/healthbar.tscn" id="2_m2yp0"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_6orqn")
@@ -14,23 +14,28 @@ offset_bottom = 91.0
 theme_override_font_sizes/font_size = 60
 text = "Score: 0"
 
-[node name="ThreeLife" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_raljj")
-centered = false
-region_enabled = true
-region_rect = Rect2(144, 0, 72, 24)
+[node name="Healthbar" parent="." instance=ExtResource("2_m2yp0")]
 
-[node name="TwoLife" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_raljj")
-centered = false
-region_enabled = true
-region_rect = Rect2(72, 0, 72, 24)
+[node name="GameOverScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 960.0
+offset_bottom = 540.0
 
-[node name="OneLife" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("2_raljj")
-centered = false
-region_enabled = true
-region_rect = Rect2(0, 0, 72, 24)
+[node name="Overlay" type="ColorRect" parent="GameOverScreen"]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 540.0
+color = Color(0, 0, 0, 0.156863)
+
+[node name="GameOverLabel" type="Label" parent="GameOverScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 80
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1

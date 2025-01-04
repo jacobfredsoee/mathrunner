@@ -5,13 +5,14 @@ const MAX_SPEED = 800.0
 const ACCELERATION = 5.0 # Speed increase per second
 const SCORE_PER_SECOND = 1.0
 const SPEED_MULTIPLIER_STEP = 100.0 # Every 100 speed increase adds 1x to multiplier
+const INITIAL_LIVES = 3
 
 var game_running: bool = false
 var last_ground_x: float = 0.0
 var ground_width: float
 var current_speed: float
 var score: float = 0.0
-
+var lives: int = INITIAL_LIVES
 var problems := []
 
 var problem_screen = preload("res://scenes/problem.tscn")
@@ -22,6 +23,9 @@ func _ready() -> void:
 	ground_width = $Ground/Sprite2D.texture.get_width()
 	
 	last_ground_x = $Ground.position.x
+	
+	# Initialize HUD with lives
+	$HUD.initialize_lives(INITIAL_LIVES)
 
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
@@ -51,6 +55,17 @@ func report_score(correct: bool, value: int):
 	else:
 		$Player/IncorrectSound.play()
 		score -= value
+		lives -= 1
+		$HUD.loose_life()
+		if lives <= 0:
+			$HUD.show_game_over()
+			# Free all existing problems from the scene
+			for problem in problems:
+				problem.queue_free()
+			problems.clear()
+			game_running = false
+			return
+
 
 func manage_score(delta: float):
 	var speed_multiplier = max(1.0, (current_speed - INITIAL_SPEED) / SPEED_MULTIPLIER_STEP + 1.0)
