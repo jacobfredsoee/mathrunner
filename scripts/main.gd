@@ -58,6 +58,9 @@ func report_score(correct: bool, value: int):
 		score -= value
 		lives -= 1
 		$HUD.lose_life()
+		$DmgTimer.start()
+		Engine.time_scale = 0.5
+		
 
 func check_game_over() -> void:
 	if lives <= 0:
@@ -99,7 +102,7 @@ func move_problems(delta: float):
 
 func remove_problems():
 	for problem in problems:
-		if problem.get_position().x < $Player.position.x - 100:
+		if problem.get_position().x < $Player.position.x - 200:
 			problem.queue_free()
 			problems.erase(problem)
 		
@@ -121,3 +124,7 @@ func cleanup_old_ground(camera_x: float) -> void:
 	for ground in get_tree().get_nodes_in_group("ground"):
 		if ground.position.x + ground_width < camera_x - get_viewport().size.x:
 			ground.queue_free()
+
+
+func _on_dmg_timer_timeout() -> void:
+	Engine.time_scale = 1.0
